@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Customers</title>
+  <style>
+    h3{
+      text-align: center;
+      color: #28a745;
+    }
+    /* Basic table styling */
+    table {
+      width: 100%; /* Make the table fill the available width */
+      border-collapse: collapse; /* Remove borders between table cells */
+    }
+    th, td {
+      padding: 10px; /* Add some padding for readability */
+      text-align: left; /* Align content to the left */
+    }
+
+    /* Header row styling */
+    th {
+      background-color: #e0f2f1; /* Light green background for headers */
+      color: #003020; /* Dark green text color for headers */
+      font-weight: bold; /* Make header text bold */
+    }
+
+    /* Body background (optional) */
+    body {
+      background-color: #f5f5f5; /* Light gray background for the body (optional) */
+    }
+
+    /* Alternate row colors */
+    tr:nth-child(even) {
+      background-color: #e8f8f7; /* Lighter green background for even rows */
+    }
+
+    /* Table border (optional) */
+    table {
+      border: 1px solid #ddd; /* Optional table border */
+    }
+    .btn {
+      padding: 10px 40px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      text-decoration: none;
+      color: #fff;
+      background-color: #28a745; /* Green background color */
+    }
+    form {
+      text-align: center; /* Center the form content horizontally */
+    }
+  </style>
+</head>
+<body>
+  
+   
+  <table class="table table-bordered border-primary">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile Number</th>
+        <th scope="col">Branch</th>
+        <th scope="col">Item Details</th>
+        <th scope="col">Select Type</th>
+        <th scope="col">Time</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in items %}
+      <tr>
+        <td>{{ item.username }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.mobile_number }}</td>
+        <td>{{ item.branch }}</td>
+        <td>{{ item.item_details }}</td>
+        <td>{{ item.select_type }}</td>
+        <td>{{ item.time }}</td>
+
+      
+        <td>
+          <!-- Delete icon with form submission -->
+          <form action="{% url 'delete_items' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name = "item_id" value = "{{ item.pk }}">
+              <button type="submit">Delete</button>
+          </form>
+          </td>
+          <td>
+            <form action="{% url 'edit_items' %}" method="post">
+              {% csrf_token %}
+              <input type="hidden" name = "itemid" value = "{{ item.pk }}">
+                <button type="submit">edit</button>
+            </form>
+      </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if msg  == "norecords" %}
+      <h3>No records to delete</h3>
+    {% endif %}
+
+    
+  </body>
+  </html>

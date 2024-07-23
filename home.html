@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost and Found Home Page</title>
+    <link rel="stylesheet" href="{% static 'helloapp/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="{% static 'helloapp/LFname.png' %}" alt="Lost & Found Logo">
+        </div>
+        <nav>
+            <ul class="menu">
+                <li><a href="#">HOW IT WORKS</a></li>
+                <li><a href="#">CONTACT</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Account</a>
+                    <div class="dropdown-content">
+                        <a href="#">Profile</a>
+                        <a href="{% url 'logout_user' %}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="main-content">
+        <div class="center-content">
+            <img src="{% static 'helloapp/LFlogo.png' %}" alt="Lost & Found" id = 'img'>
+            <h1>Lost something precious? Let's find it together.</h1>
+            <a href="{% url 'view_all_items' %}"><button>Browse for lost or found item</button></a>
+            <a href="{% url 'form' %}"><button>Report lost or found item</button></a>
+        </div>
+    </div>
+
+</body>
+</html>

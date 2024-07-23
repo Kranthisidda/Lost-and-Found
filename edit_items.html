@@ -1,0 +1,38 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Item</title>
+    <link rel="stylesheet" href="{% static  'helloapp/form.css' %}">
+    <style> 
+    </style>
+</head>
+<body>
+    <div class="post-container">
+        
+        <form action="{% url 'store_edited_item' %}" class="post-info" method = "POST"  >
+            {% csrf_token %}
+            <div class="post-tittle">
+                <h2>Report Item</h2>
+                <hr>
+                <h3>Enter item details</h3>
+                <textarea name="item_details" placeholder="Item Details" class="post-inputs"   required>{{ item.item_details }}</textarea>
+                <select name="select_type" aria-placeholder="Select type"  required>
+                    <option value="{{first}}">{{first}}</option>
+                    <option value="{{second}}">{{second}}</option>
+                </select>
+                <h3>Contact info</h3>
+                
+                <input name = "username" type="text"  Class="post-inputs"  value ="{{ item.username }}" readonly><br>
+                <input name = "email" type="email" placeholder="Your email" Class="post-inputs"  value ="{{ item.email }}"  required><br>
+                <input  name = "mobile_number" type="text" placeholder="Your mobile number" Class="post-inputs"  value ="{{ item.mobile_number }}" required><br>
+                <input  name = "branch" type="text" placeholder="Your Branch" Class="post-inputs" value ="{{ item.branch }}"  required><br>
+                <input type="hidden" name = "item_id" value = "{{ item.pk}}">
+                <button type="submit" >Submit</button>
+                
+                </div>
+        </form>
+    </div>
+</body>
+</html>
